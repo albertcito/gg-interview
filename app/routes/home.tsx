@@ -1,6 +1,5 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
-
+import BasicForm from "../ui/form/index";
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
@@ -9,5 +8,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <div className=" max-w-md mx-auto">
+      <BasicForm initialValues={{ firstName: 'John', lastName: 'Doe', phone: '1234567890' }} />
+    </div>
+  )
 }
