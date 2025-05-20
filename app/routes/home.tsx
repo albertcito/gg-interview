@@ -10,7 +10,9 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <div className=" max-w-md mx-auto">
-      <BasicForm initialValues={{ firstName: 'John', lastName: 'Doe', phone: '1234567890' }} />
+      <BasicForm
+        initialValues={{ firstName: 'John', lastName: 'Doe', phone: '1234567890', zipCode: '123456789' }}
+      />
     </div>
   )
 }

@@ -8,6 +8,7 @@ type FieldType = {
   firstName?: string;
   lastName?: string;
   phone?: string;
+  zipCode?: string;
 };
 
 const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
@@ -75,6 +76,22 @@ const BasicForm: React.FC<BasicFormProps> = ({ initialValues }) => {
     >
       <IMaskInput
         mask={'(000) 0000 000'}
+        className="ant-input css-dev-only-do-not-override-vrrzze ant-input-outlined ant-input-status-success"
+        unmask={false}
+      />
+    </Form.Item>
+
+    <Form.Item<FieldType>
+      label="Zip Code"
+      name="zipCode"
+      className={clsx(
+        'p-2! rounded-md',
+        areEquals(formValues?.zipCode, initialValues?.zipCode) ? '' : 'bg-green-50',
+      )}
+      rules={[{ required: true, message: 'Please input your zip code!' }]}
+    >
+      <IMaskInput
+        mask={'00000-0000'}
         className="ant-input css-dev-only-do-not-override-vrrzze ant-input-outlined ant-input-status-success"
         unmask={false}
       />
