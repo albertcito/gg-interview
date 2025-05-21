@@ -2,13 +2,32 @@ import clsx from 'clsx';
 import React, { useMemo, useState } from 'react';
 import { IMaskInput } from 'react-imask';
 import type { FormProps } from 'antd';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Select } from 'antd';
 import { getModifiedValues } from './getModifiedValues';
 
+
+const schools = [
+  {
+    bid: 1,
+    name: 'Depaul University',
+  },
+  {
+    bid: 2,
+    name: 'University of Illinois at Chicago',
+  },
+  {
+    bid: 3,
+    name: 'Illinois Institute of Technology',
+  },
+  {
+    bid: 4,
+    name: 'University of Illinois at Urbana-Champaign',
+  },
+];
+
 type FieldType = {
-  firstName?: string;
-  lastName?: string;
-  phone?: string;
+  schools?: number[];
+  zipCode?: string;
 };
 
 const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
@@ -23,9 +42,8 @@ interface BasicFormProps {
   initialValues?: Partial<FieldType>;
 }
 
-const stringOnlyNumbers = (value?:string) => `${value}`.replace(/\D/g, "");
 
-const BasicForm: React.FC<BasicFormProps> = ({ initialValues = {} }) => {
+const AddressForm: React.FC<BasicFormProps> = ({ initialValues = {} }) => {
   const [formValues, setFormValues] = useState<FieldType>(initialValues);
   const status = useMemo(() => getModifiedValues(formValues, initialValues), [formValues, initialValues]);
   return (
@@ -39,42 +57,36 @@ const BasicForm: React.FC<BasicFormProps> = ({ initialValues = {} }) => {
   >
     <pre>
       {JSON.stringify(formValues)}
-      </pre>
-    <Form.Item<FieldType>
-      label="First Name"
-      name="firstName"
+    </pre>
+    <Form.Item
+      label="Schools"
+      name="schools"
       className={clsx(
         'p-2! rounded-md',
-        status.firstName ? 'bg-green-50' : '',
+        status.schools ? 'bg-green-50' : '',
       )}
-      rules={[{ required: true, message: 'Please input your username!' }]}
     >
-      <Input />
+      <Select
+        options={schools.map((school) => ({
+          label: school.name,
+          value: school.bid,
+        }))}
+        allowClear
+        mode="multiple"
+      />
     </Form.Item>
 
     <Form.Item<FieldType>
-      label="Last Name"
-      name="lastName"
+      label="Zip Code"
+      name="zipCode"
       className={clsx(
         'p-2! rounded-md',
-        status.lastName ? 'bg-green-50' : '',
+        status.zipCode ? 'bg-green-50' : '',
       )}
-      rules={[{ required: true, message: 'Please input your username!' }]}
-    >
-      <Input />
-    </Form.Item>
-
-    <Form.Item<FieldType>
-      label="Phone"
-      name="phone"
-      className={clsx(
-        'p-2! rounded-md',
-        status.phone ? 'bg-green-50' : '',
-      )}
-      rules={[{ required: true, message: 'Please input your phone!' }]}
+      rules={[{ required: true, message: 'Please input your zip code!' }]}
     >
       <IMaskInput
-        mask={'(000) 0000 000'}
+        mask={'00000-0000'}
         className="ant-input css-dev-only-do-not-override-vrrzze ant-input-outlined ant-input-status-success"
         unmask={false}
       />
@@ -89,4 +101,4 @@ const BasicForm: React.FC<BasicFormProps> = ({ initialValues = {} }) => {
   );
 };
 
-export default BasicForm;
+export default AddressForm;

@@ -1,5 +1,6 @@
 import type { Route } from "./+types/home";
 import BasicForm from "../ui/form/index";
+import AddressForm from "~/ui/form/address";
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
@@ -9,15 +10,22 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <div className=" max-w-md mx-auto">
+    <div className="mx-auto flex flex-row gap-4 items-center justify-center">
       <BasicForm
         initialValues={{
           firstName: 'John',
           lastName: 'Doe',
           phone: '1234567890',
-          zipCode: '123456789'
         }}
       />
+      <div className="w-90">
+        <AddressForm
+          initialValues={{
+            schools: [1],
+            zipCode: '123456789'
+          }}
+        />
+      </div>
     </div>
   )
 }
