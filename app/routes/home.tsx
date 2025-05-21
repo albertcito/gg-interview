@@ -10,7 +10,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <div className="mx-auto flex flex-row gap-4 items-center justify-center">
+    <div className="mx-auto flex flex-wrap flex-row gap-4 items-center justify-center">
       <BasicForm
         initialValues={{
           firstName: 'John',
