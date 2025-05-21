@@ -9,9 +9,10 @@ export function meta({}: Route.MetaArgs) {
 }
 
 const bars: BarType[] = [
-  { title: 'Home', currentValue: 20, previousValue: 27, color: 'blue', currentYear: 2024, previousYear: 2023 },
-  { title: 'Cars', currentValue: 30, previousValue: 25, color: 'green', currentYear: 2024, previousYear: 2023 },
-  { title: 'Life', currentValue: 28, previousValue: 5, color: 'red', currentYear: 2024, previousYear: 2023 },
+  { title: 'brandeis', currentValue: 362, previousValue: 387, color: 'blue', currentYear: 2024, previousYear: 2023 },
+  { title: 'nyu', currentValue: 456, previousValue: 316, color: 'green', currentYear: 2024, previousYear: 2023 },
+  { title: 'merrimack', currentValue: 151, previousValue: 272, color: 'red', currentYear: 2024, previousYear: 2023 },
+  { title: 'bates', currentValue: 44, previousValue: 61, color: 'maroon', currentYear: 2024, previousYear: 2023 },
 ];
 
 export default function Bars() {
@@ -19,7 +20,7 @@ export default function Bars() {
     <div>
       <div className="flex flex-col items-center justify-center gap-4 h-screen">
         <h1 className="font-bold text-2xl text-(--ui-primary)">
-          Insurance stats
+          Stats
         </h1>
         <div className="w-full max-w-screen-md">
           <BarsBar bars={bars} />
