@@ -1,8 +1,9 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { IMaskInput } from 'react-imask';
 import type { FormProps } from 'antd';
 import { Button, Checkbox, Form, Input } from 'antd';
+import { getModifiedValues } from './getModifiedValues';
 
 type FieldType = {
   firstName?: string;
@@ -20,15 +21,14 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
 };
 
 interface BasicFormProps {
-  initialValues: Partial<FieldType>;
+  initialValues?: Partial<FieldType>;
 }
 
-function areEquals<T>(original: T, current: T) {
-  return original === current;
-}
+const stringOnlyNumbers = (value?:string) => `${value}`.replace(/\D/g, "");
 
-const BasicForm: React.FC<BasicFormProps> = ({ initialValues }) => {
+const BasicForm: React.FC<BasicFormProps> = ({ initialValues = {} }) => {
   const [formValues, setFormValues] = useState<FieldType>(initialValues);
+  const status = useMemo(() => getModifiedValues(formValues, initialValues), [formValues, initialValues]);
   return (
   <Form
     initialValues={initialValues}
@@ -46,7 +46,7 @@ const BasicForm: React.FC<BasicFormProps> = ({ initialValues }) => {
       name="firstName"
       className={clsx(
         'p-2! rounded-md',
-        areEquals(formValues?.firstName, initialValues?.firstName) ? '' : 'bg-green-50',
+        status.firstName ? 'bg-green-50' : '',
       )}
       rules={[{ required: true, message: 'Please input your username!' }]}
     >
@@ -58,7 +58,7 @@ const BasicForm: React.FC<BasicFormProps> = ({ initialValues }) => {
       name="lastName"
       className={clsx(
         'p-2! rounded-md',
-        areEquals(formValues?.lastName, initialValues?.lastName) ? '' : 'bg-green-50',
+        status.lastName ? 'bg-green-50' : '',
       )}
       rules={[{ required: true, message: 'Please input your username!' }]}
     >
@@ -70,7 +70,7 @@ const BasicForm: React.FC<BasicFormProps> = ({ initialValues }) => {
       name="phone"
       className={clsx(
         'p-2! rounded-md',
-        areEquals(formValues?.phone, initialValues?.phone) ? '' : 'bg-green-50',
+        status.phone ? 'bg-green-50' : '',
       )}
       rules={[{ required: true, message: 'Please input your phone!' }]}
     >
@@ -86,7 +86,7 @@ const BasicForm: React.FC<BasicFormProps> = ({ initialValues }) => {
       name="zipCode"
       className={clsx(
         'p-2! rounded-md',
-        areEquals(formValues?.zipCode, initialValues?.zipCode) ? '' : 'bg-green-50',
+        status.zipCode ? 'bg-green-50' : '',
       )}
       rules={[{ required: true, message: 'Please input your zip code!' }]}
     >
