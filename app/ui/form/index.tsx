@@ -37,9 +37,6 @@ const BasicForm: React.FC<BasicFormProps> = ({ initialValues = {} }) => {
     autoComplete="off"
     onValuesChange={(_, allValues) =>setFormValues(allValues)}
   >
-    <pre>
-      {JSON.stringify(formValues)}
-      </pre>
     <Form.Item<FieldType>
       label="First Name"
       name="firstName"
@@ -79,6 +76,10 @@ const BasicForm: React.FC<BasicFormProps> = ({ initialValues = {} }) => {
         unmask={false}
       />
     </Form.Item>
+
+    <pre>
+      {JSON.stringify(status, null, 2)}
+    </pre>
 
     <Form.Item label={null}>
       <Button type="primary" htmlType="submit">
