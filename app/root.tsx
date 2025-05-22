@@ -37,15 +37,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="relative">
           <div className="sticky top-0 z-10 bg-background border-b border-neutral-100">
             <nav>
-              <ul className="flex gap-2 text-sm">
+              <ul className="flex gap-3 text-sm">
                 <li>
-                  <Link to="/">
-                    Form
+                  <Link to="/" className="text-sm p-2 block hover:bg-neutral-100">
+                    Bars
                   </Link>
                 </li>
                 <li>
-                  <Link to="/bars">
-                    Bars
+                  <Link to="/contact-form" className="text-sm p-2 block hover:bg-neutral-100">
+                    Contact Form
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/school-form" className="text-sm p-2 block hover:bg-neutral-100">
+                    School Form
                   </Link>
                 </li>
               </ul>
